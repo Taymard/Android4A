@@ -38,6 +38,8 @@ dependencies {
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
 
+    implementation 'com.google.android.material:material:1.2.1'
+
     //ROOM
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
@@ -49,6 +51,8 @@ dependencies {
     implementation "org.koin:koin-core:$koin_version"
     implementation "org.koin:koin-android-ext:$koin_version"
     implementation "org.koin:koin-androidx-ext:$koin_version"
+
+    testImplementation "io.mockk:mockk:1.10.2"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

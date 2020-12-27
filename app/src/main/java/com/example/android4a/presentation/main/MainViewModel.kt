@@ -9,24 +9,29 @@ import com.example.android4a.domain.usecase.GetUserUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainViewModel(
     private val createUserUseCase:CreateUserUseCase,
     private val getUserUseCase: GetUserUseCase
 ) : ViewModel(){
 
-    val counter: MutableLiveData<Int> = MutableLiveData()
+    val loginLiveData: MutableLiveData<LoginStatus> = MutableLiveData()
 
-    init {
-        counter.value = 0
 
-    }
-
-    fun onClickedIncrement(mailUser: String) {
+    fun onClickedLogin(mailUser: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            createUserUseCase.invoke(User("test"))
-            delay(1000)
-            val user:User = getUserUseCase.Invoke("test")
+            //getUserUseCase.Invoke(mailUser)
+            //createUserUseCase.invoke(User("test"))
+            val user:User? = getUserUseCase.Invoke(mailUser)
+            val loginStatus: LoginStatus = if (user != null){
+                LoginSucces(user.email)
+            }else{
+                LoginError
+            }
+            withContext(Dispatchers.Main){
+                loginLiveData.value = loginStatus
+            }
         }
     }
 }
