@@ -1,5 +1,8 @@
 package com.example.android4a.presentation.main
 
+import android.content.Context
+import android.content.Intent
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,7 +20,6 @@ class MainViewModel(
 
     val loginLiveData: MutableLiveData<LoginStatus> = MutableLiveData()
 
-
     fun onClickedLogin(mailUser: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
             //getUserUseCase.Invoke(mailUser)
@@ -31,6 +33,13 @@ class MainViewModel(
             withContext(Dispatchers.Main){
                 loginLiveData.value = loginStatus
             }
+        }
+    }
+
+    fun onClickedCreate(mailUser: String, password: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            createUserUseCase.invoke(user = User(mailUser,password))
+
         }
     }
 }
