@@ -4,9 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.example.android4a.R
+import com.example.android4a.presentation.main.API.MenuActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
@@ -23,7 +23,8 @@ class MainActivity : AppCompatActivity() {
             when(it)
             {
                 is LoginSucces ->{
-                    val intent: Intent = Intent(this,MenuActivity::class.java)
+                    val intent: Intent = Intent(this,
+                        MenuActivity::class.java)
                     startActivity(intent)
                 }
                 is WrongPassword -> {
