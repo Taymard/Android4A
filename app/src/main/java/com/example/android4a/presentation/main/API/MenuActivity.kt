@@ -22,8 +22,6 @@ class MenuActivity : AppCompatActivity() {
         setContentView(R.layout.menu_layout)
 
         button.setOnClickListener(){
-            val toast: Toast = Toast.makeText(this,"Wesh ca marche",Toast.LENGTH_LONG)
-            toast.show()
             val intent = Intent(this,MainPokemonActivity::class.java)
             startActivity(intent)
         }
