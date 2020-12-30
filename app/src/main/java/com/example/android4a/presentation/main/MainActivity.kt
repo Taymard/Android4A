@@ -3,6 +3,7 @@ package com.example.android4a.presentation.main
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.example.android4a.R
@@ -24,6 +25,10 @@ class MainActivity : AppCompatActivity() {
                 is LoginSucces ->{
                     val intent: Intent = Intent(this,MenuActivity::class.java)
                     startActivity(intent)
+                }
+                is WrongPassword -> {
+                    var toast:Toast = Toast.makeText(this,"Wrong Password, try again",Toast.LENGTH_LONG)
+                    toast.show()
                 }
                 LoginError -> {
                 MaterialAlertDialogBuilder(this)

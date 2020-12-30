@@ -36,7 +36,7 @@ class GetUseCaseTest{
         runBlocking {
             //GIVEN
             val email = "a@a.c"
-            val expectedUser = User("a@a.c")
+            val expectedUser = User("a@a.c","p")
             coEvery { userRepository.getUser(email) } returns expectedUser
 
             //WHEN

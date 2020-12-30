@@ -2,6 +2,7 @@ package com.example.android4a.presentation.main
 
 import android.content.Context
 import android.content.Intent
+import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,16 +20,24 @@ class MainViewModel(
 ) : ViewModel(){
 
     val loginLiveData: MutableLiveData<LoginStatus> = MutableLiveData()
+    val createLiveData: MutableLiveData<CreateAccountStatus> = MutableLiveData()
 
     fun onClickedLogin(mailUser: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            //getUserUseCase.Invoke(mailUser)
-            //createUserUseCase.invoke(User("test"))
+
             val user:User? = getUserUseCase.invoke(mailUser)
-            val loginStatus: LoginStatus = if (user != null){
-                LoginSucces(user.email)
+            var loginStatus: LoginStatus = LoginError
+            if (user != null){
+                if (user.password == password) {
+                    loginStatus = LoginSucces(user.email)
+                }
+                else
+                {
+                    loginStatus = WrongPassword(user.email)
+                }
+
             }else{
-                LoginError
+                loginStatus = LoginError
             }
             withContext(Dispatchers.Main){
                 loginLiveData.value = loginStatus
@@ -36,10 +45,33 @@ class MainViewModel(
         }
     }
 
-    fun onClickedCreate(mailUser: String, password: String){
+    fun onClickedCreate(mailUser: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            createUserUseCase.invoke(user = User(mailUser,password))
-
+            if(getUserUseCase.invoke(mailUser) == null)
+            {
+                createUserUseCase.invoke(user = User(mailUser,password))
+            }
         }
     }
+
+    fun userExist(email:String,password: String)
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            var createAccountStatus: CreateAccountStatus
+            if(email == "")
+            {
+                createAccountStatus = NoEntry
+            }
+            val user:User? = getUserUseCase.invoke(email)
+            createAccountStatus = if (user == null){
+                CreateSucces(email,password)
+            }else{
+                CreateError
+            }
+            withContext(Dispatchers.Main){
+                createLiveData.value = createAccountStatus
+            }
+        }
+    }
+
 }
