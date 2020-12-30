@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.example.android4a.R
 import com.example.android4a.domain.entity.Pokemon
 import kotlinx.android.synthetic.main.row_layout.view.*
@@ -46,7 +47,7 @@ class ListAdapter(
 
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-
+        var glide: RequestManager?=null
         val pokemon:Pokemon = PokemonList[position]
         holder.header.text = pokemon.name
         holder.header.setOnClickListener{
@@ -63,7 +64,8 @@ class ListAdapter(
         }
 
         holder.footer.text = pokemon.num
-        Glide.with(context).load(pokemon.img).into(holder.imageView)
+        glide = Glide.with(context)
+        glide.load(pokemon.img).into(holder.imageView)
         holder.imageView.setOnClickListener{
             val intent = Intent(context, PokeStatActivity::class.java)
             intent.putExtra("name", pokemon.name)

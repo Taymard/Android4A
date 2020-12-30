@@ -42,7 +42,6 @@ class MainPokemonActivity : AppCompatActivity() {
                         recycler_view.apply{
                             layoutManager = LinearLayoutManager(this@MainPokemonActivity)
                             adapter = ListAdapter(response.body()!!.results,this@MainPokemonActivity)
-
                         }
                     }
                 else
@@ -50,7 +49,7 @@ class MainPokemonActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<RestPokemonResponse>, t: Throwable) {
-                Toast.makeText(this@MainPokemonActivity, "Not currently available", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainPokemonActivity, "API Error", Toast.LENGTH_SHORT).show()
             }
 
         })

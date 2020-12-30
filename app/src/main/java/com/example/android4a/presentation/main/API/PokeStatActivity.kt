@@ -7,6 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.example.android4a.R
 import kotlinx.android.synthetic.main.poke_stats_layout.*
 
@@ -16,6 +17,7 @@ class PokeStatActivity:AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.poke_stats_layout)
 
+        var glide:RequestManager?= null
         val intent = intent
         val name = intent.getStringExtra("name")
         val type = intent.getStringExtra("type")
@@ -43,7 +45,9 @@ class PokeStatActivity:AppCompatActivity() {
         Weigth.text = "Weight : $weigth"
         Prev.text = "Previous Evolution : $prev"
         Next.text = "Next Evolution : $next"
-        Glide.with(this).load(img).into(imageView)
+
+        glide = Glide.with(this)
+        glide.load(img).into(imageView)
 
         Model.setOnClickListener{
             Toast.makeText(this, "Not currently available", Toast.LENGTH_SHORT).show()
