@@ -1811,6 +1811,18 @@
          "weaknesses":"Bug, Ghost, Dark",
          "prev_evolution":"No previous evolution",
          "next_evolution":"No next evolution"
+      },
+      {
+         "id":152,
+         "num":"152",
+         "name":"Germinion",
+         "img":"https://www.serebii.net/pokemongo/pokemon/152.png",
+         "type":"Plante",
+         "height":"0.41 m",
+         "weight":"4.0 kg",
+         "weaknesses":"Bug, Fire, Dark",
+         "prev_evolution":"No previous evolution",
+         "next_evolution":"No next evolution"
       }
    ]
 }
